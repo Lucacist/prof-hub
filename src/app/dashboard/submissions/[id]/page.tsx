@@ -15,6 +15,7 @@ import { ArrowLeft, Download, FileText, Calendar } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { DeleteSubmissionButton } from "@/components/delete-submission-button"; // <--- IMPORT
 
 export default async function SubmissionsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -86,6 +87,7 @@ export default async function SubmissionsPage({ params }: { params: Promise<{ id
                         {sub.submittedAt && format(sub.submittedAt, "d MMM à HH:mm", { locale: fr })}
                       </div>
                     </TableCell>
+                    
                     <TableCell className="text-right">
                       <Button size="sm" variant="outline" asChild>
                         <a href={sub.fileUrl} target="_blank" className="text-blue-600 hover:text-blue-700">
@@ -93,6 +95,7 @@ export default async function SubmissionsPage({ params }: { params: Promise<{ id
                           Voir la copie
                         </a>
                       </Button>
+                      <DeleteSubmissionButton submissionId={sub.id} />
                     </TableCell>
                   </TableRow>
                 ))
